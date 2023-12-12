@@ -1,0 +1,7 @@
+const pontost = {
+         shop: L.marker([-22.115967513473638, -51.407092489420215], { icon: icons.shopping }),
+         parquePovo: L.marker([-22.123403668020927, -51.402417203354545], { icon: icons.parquePovo }),
+         sesc: L.marker([-22.1204603190856, -51.41369851315893], { icon: icons.sesc }),
+         museu: L.marker([-22.1164958531939, -51.4115400680029], { icon: icons.museu }),
+         matarazzo: L.marker([-22.12065981491397, -51.37945177451936], { icon: icons.matarazzo })
+      };

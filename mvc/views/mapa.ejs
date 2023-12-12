@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mapa</title>
+   <link rel="stylesheet" href="css/stylesheet.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+   <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+   * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+   }
+
+   #max {
+      width: 120px;
+      height: 100px;
+      position: absolute;
+      z-index: 1010;
+      top: 400px;
+      left: 900px;
+
+   }
+
+   #map {
+      height: 100vh;
+   }
+
+   #modalImg {
+      width: 200px;
+      height: 200px;
+      top: 0;
+      left: 0;
+   }
+
+   #corpoModal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 300px;
+      text-align: center;
+      flex-direction: column;
+
+
+   }
+
+   .imgModal {
+      width: 300px;
+      height: 250px;
+
+
+   }
+
+   .imgPoint {
+      width: 220px;
+      height: 150px;
+      border-radius: 12px;
+
+   }
+
+   .fontSize {
+      font-size: 27px;
+   }
+
+   /* ----------------------------------------------------------------------------- */
+
+   .paiDeTodos {
+      z-index: 1010;
+      position: fixed;
+
+      width: 500px;
+      height: 180px;
+      top: 20px;
+      left: 145vh;
+
+   }
+
+   .fishsC {
+      width: 500px;
+      height: 80px;
+
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+   }
+
+
+
+   /* CSS - div da FishCoin Laranja */
+   .fishOrange {
+      width: 400px;
+      height: 50px;
+      border: 1px solid #000000;
+      margin: 0px 0px 8px 0px;
+      background: linear-gradient(#9fb2e3d8, #fff2f2e8);
+      border-radius: 50px;
+
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: nowrap;
+      padding: 4px;
+
+   }
+
+   .fishC1 {
+      width: 65px;
+      height: 65px;
+   }
+
+
+   /* CSS - div do tempo(time) e dos passos(steps) */
+   .timeAndSteps {
+      width: 500px;
+      height: 60px;
+
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+      align-items: center
+   }
+
+   #time {
+      width: 200px;
+      height: 50px;
+      border-radius: 50px;
+      background: linear-gradient(#9fb2e3d8, #fff2f2e8);
+      display: flex;
+      border: 1px solid #000000;
+      justify-content: space-evenly;
+      flex-wrap: nowrap;
+      padding: 4px;
+
+
+   }
+
+   .tempoGame {
+      width: 40px;
+      height: 40px;
+   }
+
+   .steps {
+      width: 200px;
+      height: 50px;
+      display: flex;
+      border: 1px solid #000000;
+      justify-content: space-evenly;
+      flex-wrap: nowrap;
+      border-radius: 50px;
+      background: linear-gradient(#9fb2e3d8, #fff2f2e8);
+      padding: 4px;
+
+   }
+
+   .passos {
+      width: 40px;
+      height: 40px;
+   }
+
+   /* ---------------------------------------------------------------------------- */
+   #count {
+      font-size: 25px;
+   }
+
+   #imgModal {
+      min-width: 200px;
+      max-width: 400px;
+   }
+</style>
+
+<body onload="buscarLL()">
+
+   <div class="paiDeTodos">
+      <div class="fishsC">
+         <div class="fishOrange">
+
+            <img src="images/fishcoin-1.png" class="fishC1">
+            <div id="coin" class="fontSize">0</div>
+
+         </div>
+      </div>
+
+      <div class="timeAndSteps">
+
+         <div id="time">
+
+            <img src="images/relogio.png" class="tempoGame">
+
+            <div class="fontSize" id="hours">00</div>
+            <div class="fontSize">:</div>
+            <div class="fontSize" id="minutes">00</div>
+            <div class="fontSize">:</div>
+            <div class="fontSize" id="seconds">00</div>
+
+
+
+         </div>
+
+         <div class="steps">
+            <img src="images/asas.png" class="passos">
+            <div id="count">0</div>
+         </div>
+
+      </div>
+
+   </div>
+
+   <img src="images/frente/frente1.png" id="max">
+   <div id="map">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="openBtn">
+      </button>
+   </div>
+
+
+
+   <!-- -------------- Inserindo Modal ----------------- -->
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h1 class="modal-title fs-5" id="tituloModal"></h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  id="closeBtn"></button>
+            </div>
+            <div class="modal-body" id="corpoModal">
+
+
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <!-- -------------------------------------------------- -->
+
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+   <script>
+      var map = L.map('map').setView([-22.120546977913275, -51.4056391177158], 17);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+
+
+      var LeafIcon = L.Icon.extend({
+         options: {
+            iconSize: [68, 68],
+            shadowSize: [50, 64],
+            iconAnchor: [22, 94],
+            shadowAnchor: [4, 62],
+            popupAnchor: [-3, -76]
+         }
+      });
+
+      const markers = [];
+      async function buscarLL() {
+         const dadosAtrat = await fetch('http://localhost:3000/atrativos')
+         const jsonDatrat = await dadosAtrat.json()
+         let atrats = await jsonDatrat
+         const pontost = {}
+         const icons = {}
+
+         for (let atrat of atrats) {
+            let nome = atrat.nome;
+            console.log(atrat);
+            console.log(atrat.image)
+
+            // Certifique-se de que atrat.image existe
+            icons[atrat.nome] = new LeafIcon({ iconUrl: `images/upload/${atrat.image}` });
+
+            // Corrija a estrutura do objeto pontost
+            pontost[atrat.nome] = [atrat.lat, atrat.long];
+
+            // Mova a adição do marcador para fora do loop
+            const marker = L.marker(pontost[atrat.nome], { icon: icons[atrat.nome] });
+            marker.bindPopup(nome);
+            marker.addTo(map);
+            markers.push({ marker, collisionAlertShown: false });
+         }
+      }
+
+      const max = document.getElementById('max')
+      const widthVw = window.innerWidth;
+      const heigthVh = window.innerHeight;
+      let PosiX = 900;
+      let PosiY = 400;
+      let imgNmr1 = 1;
+      let imgNmr2 = 1;
+      let imgNmr3 = 1;
+
+
+
+
+      // variaveis por passos 
+      let passos = 0
+      let moedas = 0
+      let param = 10
+
+      document.addEventListener('keydown', (event) => {
+         const key = event.key
+
+         var contador = document.getElementById("count")
+         var coin = document.getElementById("coin")
+
+
+         if (key === 'ArrowDown') {
+            PosiY += 1.8;
+            max.src = `images/frente/frente${imgNmr1}.png`
+
+            passos++
+            contador.innerHTML = `${passos}`
+            console.log(passos)
+
+            if (passos === param) {
+               param += 10
+               moedas++
+               coin.innerHTML = `${moedas}`
+            }
+         }
+         else if (key === 'ArrowUp') {
+            PosiY -= 1.8;
+            max.src = `images/costa/costa${imgNmr3}.png`
+
+            passos++
+            contador.innerHTML = `${passos}`
+            if (passos === param) {
+               param += 10
+               moedas++
+               coin.innerHTML = `${moedas}`
+            }
+         }
+         else if (key === 'ArrowLeft') {
+            PosiX -= 1.8;
+            max.src = `images/esqueda/esquerda${imgNmr2}.png`
+
+            passos++
+            contador.innerHTML = `${passos}`
+            if (passos === param) {
+               param += 10
+               moedas++
+               coin.innerHTML = `${moedas}`
+            }
+         }
+         else if (key === 'ArrowRight') {
+            PosiX += 1.8;
+            max.src = `images/direita/coruja${imgNmr2}.png`
+
+
+            passos++
+            contador.innerHTML = `${passos}`
+            if (passos === param) {
+               param += 10
+               moedas++
+               coin.innerHTML = `${moedas}`
+            }
+
+            console.log(passos)
+
+         }
+
+         imgNmr1 = (imgNmr1 % 6) + 1;
+         imgNmr2 = (imgNmr2 % 14) + 1;
+         imgNmr3 = (imgNmr3 % 9) + 1;
+
+         max.style.left = PosiX + 'px';
+         max.style.top = PosiY + 'px';
+
+         var openBtn = document.getElementById('openBtn')
+         var closeBtn = document.getElementById('closeBtn')
+         const characterRect = max.getBoundingClientRect();
+
+         markers.forEach(item => {
+            const { marker, collisionAlertShown } = item;
+            if (!collisionAlertShown) {
+               const markerLatLng = marker.getLatLng();
+               const markerPos = map.latLngToContainerPoint(markerLatLng);
+
+               if (
+                  PosiX + characterRect.width > markerPos.x &&
+                  PosiX < markerPos.x + 1 && // Tamanho aproximado do ícone do marcador
+                  PosiY + characterRect.height > markerPos.y &&
+                  PosiY < markerPos.y + 1// Tamanho aproximado do ícone do marcador
+               ) {
+                  openBtn.click()
+                  infoModal("TITULO", "CORPO")
+               }
+               else {
+                  closeBtn.click()
+               }
+
+
+            }
+         })
+
+
+      });
+
+
+      /////////////////////////////////////////////////////////////
+      //                   Tempo - cronometro
+
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+      let milissegundos = 0
+      let cron;
+
+      function iniciarCronometro() {
+         cron = setInterval(atualizarCronometro, 10);
+      }
+
+
+      function atualizarCronometro() {
+         if ((milissegundos += 10) == 1000) {
+            milissegundos = 0;
+            seconds++;
+         }
+         if (seconds == 60) {
+            seconds = 0;
+            minutes++
+         }
+
+         document.getElementById('hours').innerText = retornarDados(hours);
+         document.getElementById('minutes').innerText = retornarDados(minutes);
+         document.getElementById('seconds').innerText = retornarDados(seconds)
+
+      }
+
+      function retornarDados(valor) {
+         return valor < 10 ? '0' + valor : valor;
+      }
+      iniciarCronometro()
+
+
+
+      ///////////////////////////////////////////////////////////////
+
+      ///////////////////////////////////////////////////////////////
+      //               Acrescimo de Moedas - 1000 passos
+
+      if (passos % 10 === 0) {
+         moedas += 1;
+
+         let coin = document.getElementById('coin')
+         coin.textContent = moedas.toString()
+      }
+
+
+
+
+      //////////////////////////////////////////////////////////////// 
+
+      function infoModal(titulo, corpo) {
+         const _titulo = document.getElementById('tituloModal')
+         const _corpo = document.getElementById('corpoModal')
+         _titulo.innerHTML = `PARQUE DO POVO`
+         _corpo.innerHTML = `<img src="images/fotopdp.png" id="imgModal">
+                           <br>
+                           <h4>Bem vindo ao Parque do Povo          
+                           </h4>
+         `
+      }
+
+
+
+
+
+
+
+   </script>
+
+
+</body>
+
+</html>

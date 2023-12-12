@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #6D8AD6!important;
+}
+#game{
+    display: flex;
+    justify-content: center;
+}
+
+section .conteinerV12{
+    background-color: #8FA0CC;
+}
+nav #cad{
+    text-decoration: none;
+    font-size: 30px;
+    color: #6D8AD6;
+}
+#logo{
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.j-end{
+    display: flex;
+    justify-content: end;
+    width:30px;
+    font-size: 20px;
+    
+}
+i{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+a.cadbt{
+    text-decoration: none !important;
+}

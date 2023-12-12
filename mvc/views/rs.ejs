@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Redefinir Senha</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+        body{
+            background-image: url(../image/owltecnology.png); 
+            padding: 50px;
+        }
+        .btn{
+            background-color: #59647f;
+            border-color: #7280a3;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">Redefinir Senha</h5>
+                            <form id="resetPasswordForm">
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">Nova Senha:</label>
+                                    <input type="password" class="form-control" id="newPassword" placeholder="********" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirmar Nova Senha:</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="********" required>
+                                </div>
+                            <button type="submit" class="btn btn-primary">Redefinir Senha</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="reset-password-script.js"></script>
+    <script>
+    document.getElementById("resetPasswordForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+            var newPassword = document.getElementById("newPassword").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+                if (newPassword !== confirmPassword) {
+                alert("As senhas não coincidem. Por favor, tente novamente.");
+                } else {
+                
+                alert("Senha redefinida com sucesso!");
+                
+                window.location.href = "login.html";
+                }
+    });
+    
+    </script>
+    </body>
+</html>

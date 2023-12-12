@@ -1,0 +1,162 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#secCad {
+
+    min-height: 100vh;
+    background-image: url(../../images/telaLoginFunc.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#login {
+
+    display: flex;
+    min-height: 60vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#divlogin {
+    margin-top: 10vh;
+    width: 30%;
+    height: 60vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+
+#div2 {
+
+    min-width: 60%;
+    height: 100%;
+}
+
+#div3 {
+
+    min-height: 20%;
+    margin-top: 20px;
+    margin-left: 30px;
+    color: white;
+}
+
+#border {
+
+    border-radius: 200px;
+    overflow: hidden;
+}
+
+
+
+
+
+#div2 {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+
+#form {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 20vh;
+}
+
+.form-control {
+
+   width: 100%;
+   padding: 5px 5px;
+   display: inline-block;
+   border: 0;
+   border-bottom: solid 2px #042b5f;
+   background-color: transparent;
+   outline: none;
+    
+}
+
+#div05 {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+}
+
+#div05 h2 {
+
+    font-size: 40px;
+    color: white;
+}
+.func{
+    font-size: 30px;
+    color: white;
+}
+
+#esqCad {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+
+
+#entrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+#entrar a {
+    
+    width: 30%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: solid 1px aliceblue;
+   
+}
+
+#icon-form {
+    color: aliceblue;
+    font-size: 30px;
+}
+
+#exampleFormControlInput1:focus{
+    background-color: rgba(0, 0, 0, 0.0);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+#exampleFormControlInput1::placeholder{
+    color: white;
+}
+#exampleFormControlInput1{
+    color: white;
+}

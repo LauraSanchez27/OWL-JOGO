@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+<style>
+       * {
+
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+#secCad {
+
+min-height: 100vh;
+background-image: url(images/telaCadFun.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}
+
+#Cad {
+
+display: flex;
+min-height: 60vh;
+width: 100%;
+justify-content: center;
+align-items: center;
+}
+
+#divCad {
+margin-top: 10vh;
+width: 30%;
+height: 60vh;
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 40px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
+
+
+
+#div2 {
+
+min-width: 60%;
+height: 100%;
+}
+
+#div3 {
+
+min-height: 20%;
+margin-top: 20px;
+margin-left: 30px;
+color: white;
+}
+
+#border {
+
+border-radius: 200px;
+overflow: hidden;
+}
+
+
+
+
+
+#div2 {
+
+display: flex;
+justify-content: space-between;
+flex-direction: column;
+}
+
+
+#form {
+display: flex;
+justify-content: space-around;
+align-items: center;
+flex-direction: column;
+height: 20vh;
+}
+
+.input {
+
+height: 40px;
+width: 55%;
+border-radius: 15px;
+border-style: none;
+text-align: center;
+border: 2px solid black;
+}
+
+#div05 {
+
+display: flex;
+align-items: center;
+justify-content: center;
+height: 30vh;
+}
+
+#div05 h2 {
+
+font-size: 50px;
+color: white;
+}
+
+
+#entrar {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 30vh;
+}
+
+#entrar a {
+
+width: 30%;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+text-decoration: none;
+font-size: 20px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+border: solid 1px aliceblue;
+
+}
+
+#icon-form {
+color: aliceblue;
+font-size: 25px;
+}
+</style>
+
+<body>
+    
+    <section id="secCad">
+
+        <div id="Cad">
+
+            <div id="divCad">
+
+                <div id="div2">
+
+                    <div id="div05">
+                        <h2></i>Cadastre-se aqui!!</h2>
+                    </div>
+                    <div id="form">
+                        <div class="mb-3">
+                            <label for="txtnome" id="txtnome"><i class="bi bi-person-circle" id="icon-form"></i></label>
+
+                            <input type="text" id="txtnome" class="form-control" placeholder="Nome">
+
+                            <label for="email" class="form-label"><i class="bi bi-envelope-at-fill" id="icon-form"></i></label>
+
+                            <input type="email" class="form-control" id="Usuario"placeholder="Email">
+
+                            <label for="Senha" class="form-label"> <i class="bi bi-key" id="icon-form"></i> </label>
+
+                            <input type="password" class="form-control" id="Senha" placeholder="Senha">
+
+                        </div>
+                    </div>
+
+                    <div id="entrar">
+                        <a href="/loginDev" class="btn btn-outline-light">Cadastrar</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+
+</html>
